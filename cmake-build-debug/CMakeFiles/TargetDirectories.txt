@@ -1,0 +1,3 @@
+/Users/OaixNait/Documents/recent/Learn/C++/PCI/cmake-build-debug/CMakeFiles/PCI.dir
+/Users/OaixNait/Documents/recent/Learn/C++/PCI/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/OaixNait/Documents/recent/Learn/C++/PCI/cmake-build-debug/CMakeFiles/rebuild_cache.dir
