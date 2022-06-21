@@ -43,18 +43,33 @@ void pavement::writeJson(std::string &path) const {
 
 void pavement::loadAllPlate() {
     Json::Value root;
+    std::vector<std::pair<double, double>> vec;
     for (const auto &x: this->m_allPlateJson) {
         this->parseFile(x, root);
         this->m_allPlate.emplace_back(root);
+        vec.clear();
+        for (auto &y: root["lassoReal"]) {
+            vec.emplace_back(std::pair{y["latitude"].asDouble(), y["longitude"].asDouble()});
+        }
+//        std::sort(vec.begin(), vec.end(), [](auto &&x, auto &&y) {
+//            return x.first < y.first && x.second < y.second;
+//        });
+        this->m_allPlatePosition.emplace_back(vec);
     }
 }
 
 void pavement::loadAllDisease() {
     Json::Value root;
+    disease d;
     for (const auto &x: this->m_allDiseaseJson) {
         if (EndWith(x, "json")) {
             this->parseFile(x, root);
             this->m_allDisease.emplace_back(root);
+            auto s = root["name"].asString();
+            d.type = split(s);
+            d.latitude = root["centerPoint"]["latitude"].asDouble();
+            d.longitude = root["centerPoint"]["longitude"].asDouble();
+            this->m_allDiseasePosition.emplace_back(d);
         }
     }
 }
@@ -71,4 +86,13 @@ bool pavement::EndWith(const std::string &str, const std::string &suffix) {
     } else {
         return false;
     }
+}
+
+std::string pavement::split(const std::string &inputStr) {
+    std::vector<std::string> res;
+    std::stringstream ss(inputStr);
+    std::string str;
+    while (getline(ss, str, '_'))
+        res.emplace_back(str);
+    return res[1];
 }

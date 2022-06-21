@@ -25,21 +25,13 @@ int main() {
 #else
     string taskPath("/media/dataRep2/processed/100614/");
 #endif
-    for (const auto &entry : std::filesystem::directory_iterator(taskPath+"plate")){
-        std::cout << entry.path() << std::endl;
-    }
-//    auto ss=taskPath.append("image/disease/segment/").append(algoID).append("/");
-//    cout<<ss<<endl;
-    for (const auto &entry: std::filesystem::directory_iterator(
-            taskPath.append("image/disease/segment/").append(algoID).append("/"))) {
-        for (const auto &diseaseEntry: std::filesystem::directory_iterator(entry.path()))
-            std::cout << diseaseEntry.path() << std::endl;
-    }
+//    enum color_set1 {RED, BLUE, WHITE, BLACK};
 
-    pavement* p=new cementpavement(taskPath,algoID);
-    p->loadAllPlate();
-    p->loadAllDisease();
-    p->calcPCI();
-    p->writeJson();
+
+//    pavement* p=new cementpavement(taskPath,algoID);
+//    p->loadAllPlate();
+//    p->loadAllDisease();
+//    p->calcPCI();
+//    p->writeJson();
     return 0;
 }

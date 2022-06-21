@@ -8,7 +8,8 @@ include_directories("./jsoncpp/include/json")
 link_directories("./jsoncpp/lib")
 
 #add_executable(PCI main.cpp pavement.cpp pavement.h asphaltpavement.cpp asphaltpavement.h cementpavement.cpp cementpavement.h)
-add_executable(PCI main.cpp)
+add_executable(PCI main.cpp pavement.cpp pavement.h cementpavement.cpp cementpavement.h)
+#add_executable(PCI main.cpp)
 
 target_link_libraries(PCI jsoncpp)
 

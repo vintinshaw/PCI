@@ -7,13 +7,20 @@
 
 #include "pavement.h"
 
-class cementpavement :public pavement {
+class cementpavement : public pavement {
 public:
     cementpavement(std::string &taskPath, std::string &algoID);
+
+    static bool isPointInRect(double x, double y, const std::vector<std::pair<double, double>> &Rect);
+
+    stacic int disToIndex(const std::string &str);
 
     void calcPCI() final;
 
     ~cementpavement() override;
+
+private:
+
 };
 
 
