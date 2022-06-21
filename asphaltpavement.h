@@ -8,7 +8,7 @@
 #include "pavement.h"
 class asphaltpavement: pavement{
 public:
-    asphaltpavement(std::string &strPrjDir, std::vector<std::string> &vecInPath);
+    asphaltpavement(std::string &taskPath, std::string &algoID,std::string &objectID);
 
     virtual ~asphaltpavement();
 };

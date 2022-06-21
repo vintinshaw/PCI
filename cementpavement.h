@@ -9,11 +9,11 @@
 
 class cementpavement : public pavement {
 public:
-    cementpavement(std::string &taskPath, std::string &algoID);
+    cementpavement(std::string &taskPath, std::string &algoID,std::string &objectID);
 
     static bool isPointInRect(double x, double y, const std::vector<std::pair<double, double>> &Rect);
 
-    stacic int disToIndex(const std::string &str);
+    static int disToIndex(const std::string &str);
 
     void calcPCI() final;
 

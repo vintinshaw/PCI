@@ -19,7 +19,8 @@ decltype(auto) split(string &inputStr) {
 }
 
 int main() {
-    string algoID("6");
+    string segmentID("6");
+    string objectID("0");
 #ifndef _linux
     string taskPath("/Volumes/dataRep2/processed/100614/");
 #else
@@ -28,7 +29,7 @@ int main() {
 //    enum color_set1 {RED, BLUE, WHITE, BLACK};
 
 
-//    pavement* p=new cementpavement(taskPath,algoID);
+//    pavement* p=new cementpavement(taskPath,segmentID,objectID);
 //    p->loadAllPlate();
 //    p->loadAllDisease();
 //    p->calcPCI();

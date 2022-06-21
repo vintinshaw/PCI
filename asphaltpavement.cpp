@@ -4,7 +4,8 @@
 
 #include "asphaltpavement.h"
 
-asphaltpavement::asphaltpavement(std::string &strPrjDir, std::vector<std::string> &vecInPath) : pavement(strPrjDir, vecInPath) {}
+asphaltpavement::asphaltpavement(std::string &taskPath, std::string &algoID, std::string &objectID) : pavement(
+        std::string & taskPath, std::string & algoID, std::string & objectID) {}
 
 asphaltpavement::~asphaltpavement() {
 

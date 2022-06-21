@@ -1,7 +1,7 @@
 //
 // Created by OaixNait on 2022/6/16.
 //
-
+#include <numeric>
 #include "cementpavement.h"
 
 
@@ -22,20 +22,50 @@ void cementpavement::calcPCI() {
             }
         }
         for(int i=0;i<D.size();i++)
-//            TODO
-            DV[i]=1;
-        std::sort(DV.begin(), DV.end());
-        if(DV[13]>5){
+//            TODO DV[i]=???
+//        1.将规定区域中道面出现的所有损坏类型的折减扣分值由大到小排序 形成一维数组
+        std::sort(DV.begin(), DV.end(),std::greater<double>());
+        double maxCDV=0;
+//      否则
+        if(DV[1]>5){
+            double HDV=DV[0];
+            double m=1.0+(9.0/95)*(100-HDV);
+            int mCeil= ceil(m);
+//           0~m中最小的折减扣分值，用3.4-2修正
+            DV[mCeil-1]=(mCeil-m)*DV[mCeil-1];
+//            （3
+            int pos5=0;
+            for(int i=mCeil-1;i>=0;i--){
+                if(DV[i]>=5){
+                    pos5=i;
+                    break;
+                }
+            }
+            while (DV[1]>5){
+                int q=0;
+                double maxCDV0=0;
+                for(int i=0;i<mCeil;i++){
+                    if(DV[i]>5)
+                        q++;
+                    maxCDV0+=DV[i];
+                }
+                //TODO 查表 CDV[i]=???
+                DV[pos5]=5;
+                pos5--;
+                maxCDV=std::max()
+            }
+
 
         } else{
-            accumulate
-
+//            2.如果{DVi(i=1 ~ n)}中{DVi >5的损坏数量不大于1则: MaxCDV=
+            maxCDV=accumulate(DV.begin(),DV.end(),0);
         }
+        double PCI=100-maxCDV;
     }
 
 }
 
-cementpavement::cementpavement(std::string &taskPath, std::string &algoID) : pavement(taskPath, algoID) {}
+cementpavement::cementpavement(std::string &taskPath, std::string &algoID,std::string &objectID) : pavement(taskPath, algoID,objectID) {}
 
 bool cementpavement::isPointInRect(double x, double y, const std::vector<std::pair<double, double>> &Rect) {
     auto A = Rect[0];
