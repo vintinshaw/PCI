@@ -1,6 +1,8 @@
 //
 // Created by OaixNait on 2022/6/16.
 //
+#include <iostream>
+#include<algorithm>
 #include <numeric>
 #include "cementpavement.h"
 
@@ -10,62 +12,69 @@ cementpavement::~cementpavement() = default;
 
 void cementpavement::calcPCI() {
     for (const auto &onePlate: m_allPlatePosition) {
-        std::vector<double> D(15, 0.0);
+        std::vector<int> D(15, 0);
         std::vector<double> DV(15, 0.0);
         for (const auto &oneDis: m_allDiseasePosition) {
             double x = oneDis.latitude;
             double y = oneDis.longitude;
             std::string type = oneDis.type;
             if (isPointInRect(x, y, onePlate)) {
-                D[disToIndex(type)]=100;
+                D[disToIndex(type)] = 100;
                 break;
             }
         }
-        for(int i=0;i<D.size();i++)
-//            TODO DV[i]=???
-//        1.将规定区域中道面出现的所有损坏类型的折减扣分值由大到小排序 形成一维数组
-        std::sort(DV.begin(), DV.end(),std::greater<double>());
-        double maxCDV=0;
+        for (int i = 0; i < D.size(); i++)
+            if (D[i] == 100)
+                DV[i] = diseaseCurve[i].second;
+            else
+                DV[i] = diseaseCurve[i].first;
+//      1.将规定区域中道面出现的所有损坏类型的折减扣分值由大到小排序 形成一维数组
+        std::sort(DV.begin(), DV.end(), std::greater<>());
+        double maxCDV = 0;
 //      否则
-        if(DV[1]>5){
-            double HDV=DV[0];
-            double m=1.0+(9.0/95)*(100-HDV);
-            int mCeil= ceil(m);
+        if (DV[1] > 5) {
+            double HDV = DV[0];
+            double m = 1.0 + (9.0 / 95) * (100 - HDV);
+            int mCeil = ceil(m);
 //           0~m中最小的折减扣分值，用3.4-2修正
-            DV[mCeil-1]=(mCeil-m)*DV[mCeil-1];
+            DV[mCeil - 1] = (mCeil - m) * DV[mCeil - 1];
 //            （3
-            int pos5=0;
-            for(int i=mCeil-1;i>=0;i--){
-                if(DV[i]>=5){
-                    pos5=i;
+            int pos5 = 0;
+            for (int i = mCeil - 1; i >= 0; i--) {
+                if (DV[i] >= 5) {
+                    pos5 = i;
                     break;
                 }
             }
-            while (DV[1]>5){
-                int q=0;
-                double maxCDV0=0;
-                for(int i=0;i<mCeil;i++){
-                    if(DV[i]>5)
+//          pos5:最后一个DV[i] >= 5的下标
+            std::vector<double> CDV(pos5 + 1, 0.0);
+            while (DV[1] > 5) {
+                int q = 0;
+                double maxCDV0 = 0;
+                for (int i = 0; i < mCeil; i++) {
+                    if (DV[i] > 5)
                         q++;
-                    maxCDV0+=DV[i];
+                    maxCDV0 += DV[i];
                 }
-                //TODO 查表 CDV[i]=???
-                DV[pos5]=5;
+                auto qqurve=QCureve[q-1];
+                CDV[pos5] =maxCDV0*maxCDV0*qqurve[0]+maxCDV0*qqurve[1]+maxCDV0;
+                DV[pos5] = 5;
                 pos5--;
-                maxCDV=std::max()
             }
-
-
-        } else{
+            auto maxCDVposi = std::max_element(CDV.begin(), CDV.end());
+            maxCDV = *maxCDVposi;
+        } else {
 //            2.如果{DVi(i=1 ~ n)}中{DVi >5的损坏数量不大于1则: MaxCDV=
-            maxCDV=accumulate(DV.begin(),DV.end(),0);
+            maxCDV = accumulate(DV.begin(), DV.end(), 0.0);
         }
-        double PCI=100-maxCDV;
+        double PCI = 100 - maxCDV;
+        std::cout << PCI << std::endl;
     }
-
 }
 
-cementpavement::cementpavement(std::string &taskPath, std::string &algoID,std::string &objectID) : pavement(taskPath, algoID,objectID) {}
+cementpavement::cementpavement(std::string &taskPath, std::string &algoID, std::string &objectID) : pavement(taskPath,
+                                                                                                             algoID,
+                                                                                                             objectID) {}
 
 bool cementpavement::isPointInRect(double x, double y, const std::vector<std::pair<double, double>> &Rect) {
     auto A = Rect[0];

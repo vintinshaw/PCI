@@ -51,7 +51,7 @@ void pavement::loadAllPlate() {
     std::vector<std::pair<double, double>> vec;
     for (const auto &x: this->m_allPlateJson) {
         this->parseFile(x, root);
-        this->m_allPlate.emplace_back(root);
+//        this->m_allPlate.emplace_back(root);
         vec.clear();
         for (auto &y: root["lassoReal"]) {
             vec.emplace_back(std::pair{y["latitude"].asDouble(), y["longitude"].asDouble()});
@@ -69,7 +69,7 @@ void pavement::loadAllDisease() {
     for (const auto &x: this->m_allDiseaseJson) {
         if (EndWith(x, "json")) {
             this->parseFile(x, root);
-            this->m_allDisease.emplace_back(root);
+//            this->m_allDisease.emplace_back(root);
             auto s = root["name"].asString();
             d.type = split(s);
             d.latitude = root["centerPoint"]["latitude"].asDouble();
