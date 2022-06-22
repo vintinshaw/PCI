@@ -5,12 +5,12 @@
 #include <fstream>
 #include "pavement.h"
 
-pavement::pavement(std::string &taskPath, std::string &algoID,std::string &objectID) {
+pavement::pavement(std::string taskPath, std::string &segmentID,std::string &objectID) {
     for (const auto &entry: std::filesystem::directory_iterator(taskPath + "plate")) {
         this->m_allPlateJson.emplace_back(entry.path().string());
     }
     for (const auto &entry: std::filesystem::directory_iterator(
-            taskPath.append("image/disease/segment/").append(algoID).append("/"))) {
+            taskPath.append("image/disease/segment/").append(segmentID).append("/"))) {
         for (const auto &diseaseEntry: std::filesystem::directory_iterator(entry.path()))
             this->m_allDiseaseJson.emplace_back(diseaseEntry.path().string());
     }

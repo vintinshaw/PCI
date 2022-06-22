@@ -6,9 +6,10 @@
 #define PCI_ASPHALTPAVEMENT_H
 
 #include "pavement.h"
-class asphaltpavement: pavement{
+
+class asphaltpavement : pavement {
 public:
-    asphaltpavement(std::string &taskPath, std::string &algoID,std::string &objectID);
+    asphaltpavement(std::string taskPath, std::string &segmentID, std::string &objectID);
 
     virtual ~asphaltpavement();
 };

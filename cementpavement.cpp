@@ -56,8 +56,8 @@ void cementpavement::calcPCI() {
                         q++;
                     maxCDV0 += DV[i];
                 }
-                auto qqurve=QCureve[q-1];
-                CDV[pos5] =maxCDV0*maxCDV0*qqurve[0]+maxCDV0*qqurve[1]+maxCDV0;
+                auto qqurve = QCureve[q - 1];
+                CDV[pos5] = maxCDV0 * maxCDV0 * qqurve[0] + maxCDV0 * qqurve[1] + maxCDV0;
                 DV[pos5] = 5;
                 pos5--;
             }
@@ -72,9 +72,9 @@ void cementpavement::calcPCI() {
     }
 }
 
-cementpavement::cementpavement(std::string &taskPath, std::string &algoID, std::string &objectID) : pavement(taskPath,
-                                                                                                             algoID,
-                                                                                                             objectID) {}
+cementpavement::cementpavement(std::string taskPath, std::string &segmentID, std::string &objectID) : pavement(taskPath,
+                                                                                                               segmentID,
+                                                                                                               objectID) {}
 
 bool cementpavement::isPointInRect(double x, double y, const std::vector<std::pair<double, double>> &Rect) {
     auto A = Rect[0];

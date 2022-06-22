@@ -4,8 +4,8 @@
 
 #include "asphaltpavement.h"
 
-asphaltpavement::asphaltpavement(std::string &taskPath, std::string &algoID, std::string &objectID) : pavement(
-        std::string & taskPath, std::string & algoID, std::string & objectID) {}
+asphaltpavement::asphaltpavement(std::string taskPath, std::string &segmentID, std::string &objectID) : pavement(
+        taskPath, segmentID, objectID) {}
 
 asphaltpavement::~asphaltpavement() {
 

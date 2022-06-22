@@ -9,7 +9,7 @@
 
 class cementpavement : public pavement {
 public:
-    cementpavement(std::string &taskPath, std::string &algoID, std::string &objectID);
+    cementpavement(std::string taskPath, std::string &segmentID, std::string &objectID);
 
     static bool isPointInRect(double x, double y, const std::vector<std::pair<double, double>> &Rect);
 

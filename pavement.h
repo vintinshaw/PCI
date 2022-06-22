@@ -20,7 +20,7 @@ struct disease {
 
 class pavement {
 public:
-    pavement(std::string &taskPath, std::string &algoID,std::string &objectID);
+    pavement(std::string taskPath, std::string &segmentID,std::string &objectID);
 
     virtual void loadAllPlate();
 
