@@ -9,7 +9,7 @@
 
 class cementpavement : public pavement {
 public:
-    cementpavement(std::string taskPath, std::string &segmentID, std::string &objectID);
+    cementpavement(std::string &taskPath, std::string &segmentID, std::string &objectID);
 
     static bool isPointInRect(double x, double y, const std::vector<std::pair<double, double>> &Rect);
 
@@ -26,7 +26,7 @@ private:
             {0, 83.5281},//破碎板或交叉裂缝
             {0, 56.5763},//沉陷或错台
             {0, 100},//胀裂
-            {7, 7},//嵌缝料损坏
+            {0, 7},//嵌缝料损坏
             {0, 36.4447},//接缝破碎
             {0, 51.6087},//唧泥或板底脱空
             {0, 49.3864},//耐久性裂缝

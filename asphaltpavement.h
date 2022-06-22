@@ -9,7 +9,7 @@
 
 class asphaltpavement : pavement {
 public:
-    asphaltpavement(std::string taskPath, std::string &segmentID, std::string &objectID);
+    asphaltpavement(std::string &taskPath, std::string &segmentID, std::string &objectID);
 
     virtual ~asphaltpavement();
 };

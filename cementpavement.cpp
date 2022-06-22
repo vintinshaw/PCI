@@ -4,6 +4,7 @@
 #include <iostream>
 #include<algorithm>
 #include <numeric>
+#include <cstdlib>
 #include "cementpavement.h"
 
 
@@ -11,6 +12,7 @@ cementpavement::~cementpavement() = default;
 
 
 void cementpavement::calcPCI() {
+    std::cout << "Start calc PCI" << std::endl;
     for (const auto &onePlate: m_allPlatePosition) {
         std::vector<int> D(15, 0);
         std::vector<double> DV(15, 0.0);
@@ -56,7 +58,7 @@ void cementpavement::calcPCI() {
                         q++;
                     maxCDV0 += DV[i];
                 }
-                auto qqurve = QCureve[q - 1];
+                auto &qqurve = QCureve[q - 1];
                 CDV[pos5] = maxCDV0 * maxCDV0 * qqurve[0] + maxCDV0 * qqurve[1] + maxCDV0;
                 DV[pos5] = 5;
                 pos5--;
@@ -72,15 +74,17 @@ void cementpavement::calcPCI() {
     }
 }
 
-cementpavement::cementpavement(std::string taskPath, std::string &segmentID, std::string &objectID) : pavement(taskPath,
-                                                                                                               segmentID,
-                                                                                                               objectID) {}
+cementpavement::cementpavement(std::string &taskPath, std::string &segmentID, std::string &objectID) : pavement(
+        taskPath,
+        segmentID,
+        objectID) {
+}
 
 bool cementpavement::isPointInRect(double x, double y, const std::vector<std::pair<double, double>> &Rect) {
-    auto A = Rect[0];
-    auto B = Rect[1];
-    auto C = Rect[2];
-    auto D = Rect[3];
+    auto &A = Rect[0];
+    auto &B = Rect[1];
+    auto &C = Rect[2];
+    auto &D = Rect[3];
     double a = (B.first - A.first) * (y - A.second) - (B.second - A.second) * (x - A.first);
     double b = (C.first - B.first) * (y - B.second) - (C.second - B.second) * (x - B.first);
     double c = (D.first - C.first) * (y - C.second) - (D.second - C.second) * (x - C.first);
@@ -91,23 +95,27 @@ bool cementpavement::isPointInRect(double x, double y, const std::vector<std::pa
 }
 
 int cementpavement::disToIndex(const std::string &strname) {
-    if (strname == "cracks" || strname == "durability cracks" || strname ==
-                                                                 "contractibility crack" ||
+    if (strname == "crack" || strname == "cracks" || strname == "durability cracks" || strname ==
+                                                                                       "contractibility crack" ||
         strname == "transverse cracks"
         || strname == "cracking" || strname == "longitudinalcracking" || strname ==
                                                                          "transversecracking") {
-        return 1;
-    } else if (strname == "corner fracture" || strname == "corner spalling"
+        return 0;
+    } else if (strname == "cornerfracture" || strname == "corner fracture" || strname == "corner spalling"
                || strname == "cornerbreak" || strname == "cornerspalling") {
-        return 2;
-    } else if (strname == "seam broken"
+        return 1;
+    } else if (strname == "seambroken" || strname == "seam broken"
                || strname == "jointsealdamage") {
-        return 3;
+        return 6;
     } else if (strname == "small patches" || strname == "large patcjes"
                || strname == "patch" || strname == "patches and digging patches") {
-        return 4;
+        return 13;
     } else {
-        return 5;
+        return rand()%15;
+//        std::mt19937 rng;
+//        rng.seed(std::random_device()());
+//        std::uniform_int_distribution<std::mt19937::result_type> dist15(0, 15);
+//        return (int)dist15(rng);
     }
 
 }

@@ -5,20 +5,24 @@
 #include <fstream>
 #include "pavement.h"
 
-pavement::pavement(std::string taskPath, std::string &segmentID,std::string &objectID) {
+pavement::pavement(std::string &taskPath, std::string &segmentID, std::string &objectID) {
     for (const auto &entry: std::filesystem::directory_iterator(taskPath + "plate")) {
         this->m_allPlateJson.emplace_back(entry.path().string());
     }
+    auto taskpathCopy = taskPath;
     for (const auto &entry: std::filesystem::directory_iterator(
             taskPath.append("image/disease/segment/").append(segmentID).append("/"))) {
         for (const auto &diseaseEntry: std::filesystem::directory_iterator(entry.path()))
             this->m_allDiseaseJson.emplace_back(diseaseEntry.path().string());
     }
     for (const auto &entry: std::filesystem::directory_iterator(
-            taskPath.append("image/disease/object/").append(objectID).append("/"))) {
+            taskpathCopy.append("image/disease/object/").append(objectID).append("/"))) {
         for (const auto &diseaseEntry: std::filesystem::directory_iterator(entry.path()))
             this->m_allDiseaseJson.emplace_back(diseaseEntry.path().string());
     }
+    std::cout << "Init Path Successful" << std::endl;
+    std::cout << taskPath << std::endl;
+    std::cout << taskpathCopy << std::endl;
 }
 
 pavement::~pavement() = default;
@@ -61,6 +65,8 @@ void pavement::loadAllPlate() {
 //        });
         this->m_allPlatePosition.emplace_back(vec);
     }
+    std::cout << "Load all plate Successful" << std::endl;
+    std::cout << "Total plate num: " << this->m_allPlatePosition.size() << std::endl;
 }
 
 void pavement::loadAllDisease() {
@@ -77,6 +83,8 @@ void pavement::loadAllDisease() {
             this->m_allDiseasePosition.emplace_back(d);
         }
     }
+    std::cout << "Load all Disease Successful" << std::endl;
+    std::cout << "Total disease num: " << this->m_allDiseasePosition.size() << std::endl;
 }
 
 bool pavement::EndWith(const std::string &str, const std::string &suffix) {
