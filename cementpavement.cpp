@@ -89,9 +89,7 @@ bool cementpavement::isPointInRect(double x, double y, const std::vector<std::pa
     double b = (C.first - B.first) * (y - B.second) - (C.second - B.second) * (x - B.first);
     double c = (D.first - C.first) * (y - C.second) - (D.second - C.second) * (x - C.first);
     double d = (A.first - D.first) * (y - D.second) - (A.second - D.second) * (x - D.first);
-    if ((a > 0 && b > 0 && c > 0 && d > 0) || (a < 0 && b < 0 && c < 0 && d < 0))
-        return true;
-    else return false;
+    return (a > 0 && b > 0 && c > 0 && d > 0) || (a < 0 && b < 0 && c < 0 && d < 0);
 }
 
 int cementpavement::disToIndex(const std::string &strname) {
@@ -111,7 +109,7 @@ int cementpavement::disToIndex(const std::string &strname) {
                || strname == "patch" || strname == "patches and digging patches") {
         return 13;
     } else {
-        return rand()%15;
+        return rand() % 15;
 //        std::mt19937 rng;
 //        rng.seed(std::random_device()());
 //        std::uniform_int_distribution<std::mt19937::result_type> dist15(0, 15);
