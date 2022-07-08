@@ -103,31 +103,16 @@ void HttpServer::HandleHttpEvent(mg_connection *connection, http_message *http_r
     }
 //    return strRet;
 //
-//    // 其他请求
-//    if (route_check(http_req, "/")) // index page
-//        mg_serve_http(connection, http_req, s_server_option);
-//    else if (route_check(http_req, "/api/hello")) {
-//        // 直接回传
-//        SendHttpRsp(connection, "welcome to httpserver");
-//    } else if (route_check(http_req, "/api/sum")) {
-//        // 简单post请求，加法运算测试
-//        char n1[100], n2[100];
-//        double result;
-//
-//        /* Get form variables */
-//        mg_get_http_var(&http_req->body, "n1", n1, sizeof(n1));
-//        mg_get_http_var(&http_req->body, "n2", n2, sizeof(n2));
-//
-//        /* Compute the result and send it back as a JSON object */
-//        result = strtod(n1, NULL) + strtod(n2, NULL);
-//        SendHttpRsp(connection, std::to_string(result));
-//    } else {
-//        mg_printf(
-//                connection,
-//                "%s",
-//                "HTTP/1.1 501 Not Implemented\r\n"
-//                "Content-Length: 0\r\n\r\n");
-//    }
+    // 其他请求
+    if (route_check(http_req, "/")) // index page
+        mg_serve_http(connection, http_req, s_server_option);
+    else {
+        mg_printf(
+                connection,
+                "%s",
+                "HTTP/1.1 501 Not Implemented\r\n"
+                "Content-Length: 0\r\n\r\n");
+    }
 }
 
 // ---- websocket ---- //
