@@ -3,6 +3,7 @@
 //
 #include <utility>
 #include "http_server.h"
+#include "json/json.h"
 
 void HttpServer::Init(const std::string &port) {
     m_port = port;
@@ -76,7 +77,9 @@ void HttpServer::SendHttpRsp(mg_connection *connection, std::string rsp) {
     // 必须先发送header, 暂时还不能用HTTP/2.0
     mg_printf(connection, "%s", "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n");
     // 以json形式返回
-    mg_printf_http_chunk(connection, "{ \"result\": %s }", rsp.c_str());
+    mg_printf_http_chunk(connection, "%s", rsp.c_str());
+
+//    mg_printf_http_chunk(connection, "{ \"result\": %s }", rsp.c_str());
     // 发送空白字符快，结束当前响应
     mg_send_http_chunk(connection, "", 0);
 
@@ -100,19 +103,30 @@ void HttpServer::HandleHttpEvent(mg_connection *connection, http_message *http_r
     if (it != s_handler_map.end()) {
         ReqHandler handle_func = it->second;
         handle_func(url, body, connection, &HttpServer::SendHttpRsp);
+    } else {
+        ReqHandler handle_func = ReqHandler(
+                [](std::string url, std::string body, mg_connection *c, OnRspCallback rsp_callback) {
+                    Json::Value resJValue;
+                    resJValue["key"] = url;
+                    resJValue["res"] = "undefined request";
+                    Json::FastWriter writer;
+                    rsp_callback(c, writer.write(resJValue));
+                    return writer.write(resJValue);
+                });
+        handle_func(url, body, connection, &HttpServer::SendHttpRsp);
     }
 //    return strRet;
 //
     // 其他请求
-    if (route_check(http_req, "/")) // index page
-        mg_serve_http(connection, http_req, s_server_option);
-    else {
-        mg_printf(
-                connection,
-                "%s",
-                "HTTP/1.1 501 Not Implemented\r\n"
-                "Content-Length: 0\r\n\r\n");
-    }
+//    if (route_check(http_req, "/")) // index page
+//        mg_serve_http(connection, http_req, s_server_option);
+//    else {
+//        mg_printf(
+//                connection,
+//                "%s",
+//                "HTTP/1.1 501 Not Implemented\r\n"
+//                "Content-Length: 0\r\n\r\n");
+//    }
 }
 
 // ---- websocket ---- //

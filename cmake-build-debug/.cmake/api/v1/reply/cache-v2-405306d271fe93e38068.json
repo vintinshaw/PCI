@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/OaixNait/Documents/recent/Learn/C++/PCI/cmake-build-debug"
+			"value" : "/Users/OaixNait/Documents/Code.nosync/C++project/PCI/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -515,7 +515,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/OaixNait/Documents/recent/Learn/C++/PCI"
+			"value" : "/Users/OaixNait/Documents/Code.nosync/C++project/PCI"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -1087,7 +1087,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/OaixNait/Documents/recent/Learn/C++/PCI/cmake-build-debug"
+			"value" : "/Users/OaixNait/Documents/Code.nosync/C++project/PCI/cmake-build-debug"
 		},
 		{
 			"name" : "PCI_IS_TOP_LEVEL",
@@ -1111,7 +1111,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/OaixNait/Documents/recent/Learn/C++/PCI"
+			"value" : "/Users/OaixNait/Documents/Code.nosync/C++project/PCI"
 		}
 	],
 	"kind" : "cache",

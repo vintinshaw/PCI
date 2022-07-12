@@ -1,4 +1,4 @@
-# Install script for directory: /Users/OaixNait/Documents/recent/Learn/C++/PCI
+# Install script for directory: /Users/OaixNait/Documents/Code.nosync/C++project/PCI
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/OaixNait/Documents/recent/Learn/C++/PCI/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/OaixNait/Documents/Code.nosync/C++project/PCI/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -72,11 +72,11 @@
 			[
 				{
 					"backtrace" : 4,
-					"path" : "/Users/OaixNait/Documents/recent/Learn/C++/PCI/./jsoncpp/include"
+					"path" : "/Users/OaixNait/Documents/Code.nosync/C++project/PCI/./jsoncpp/include"
 				},
 				{
 					"backtrace" : 5,
-					"path" : "/Users/OaixNait/Documents/recent/Learn/C++/PCI/./jsoncpp/include/json"
+					"path" : "/Users/OaixNait/Documents/Code.nosync/C++project/PCI/./jsoncpp/include/json"
 				}
 			],
 			"language" : "CXX",
@@ -109,11 +109,11 @@
 			[
 				{
 					"backtrace" : 4,
-					"path" : "/Users/OaixNait/Documents/recent/Learn/C++/PCI/./jsoncpp/include"
+					"path" : "/Users/OaixNait/Documents/Code.nosync/C++project/PCI/./jsoncpp/include"
 				},
 				{
 					"backtrace" : 5,
-					"path" : "/Users/OaixNait/Documents/recent/Learn/C++/PCI/./jsoncpp/include/json"
+					"path" : "/Users/OaixNait/Documents/Code.nosync/C++project/PCI/./jsoncpp/include/json"
 				}
 			],
 			"language" : "C",
@@ -138,11 +138,11 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "-L/Users/OaixNait/Documents/recent/Learn/C++/PCI/./jsoncpp/lib",
+				"fragment" : "-L/Users/OaixNait/Documents/Code.nosync/C++project/PCI/./jsoncpp/lib",
 				"role" : "libraryPath"
 			},
 			{
-				"fragment" : "-Wl,-rpath,/Users/OaixNait/Documents/recent/Learn/C++/PCI/./jsoncpp/lib",
+				"fragment" : "-Wl,-rpath,/Users/OaixNait/Documents/Code.nosync/C++project/PCI/./jsoncpp/lib",
 				"role" : "libraries"
 			},
 			{
