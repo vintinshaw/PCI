@@ -20,6 +20,7 @@ public:
     ~cementpavement() override;
 
 private:
+//  描点，损害程度全部中等，损坏密度只考虑0或1。
     const std::vector<std::pair<double, double>> diseaseCurve{
             {0, 57.6714},//横向、纵向、斜向裂缝
             {0, 72.5366},//角隅断裂
@@ -38,7 +39,7 @@ private:
             {0, 49.2344}//大补丁
     };
     const std::vector<std::vector<double>> QCureve{
-            {0, 1, 0},//q=1
+            {0,       1,      0},//q=1
             {-0.0012, 0.9859, -3.2434},//q=2
             {-0.0012, 0.8996, -3.6211},//q=3
             {-0.0017, 0.9038, -5.2561},//q=4
