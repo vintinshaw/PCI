@@ -2,14 +2,13 @@ cmake_minimum_required(VERSION 3.22)
 project(PCI)
 
 set(CMAKE_CXX_STANDARD 17)
-include_directories("./jsoncpp/include")
-include_directories("./jsoncpp/include/json")
+include_directories("3rdparty/jsoncpp/include")
+include_directories("3rdparty/workflow/include")
 
-link_directories("./jsoncpp/lib")
+link_directories("3rdparty/jsoncpp/lib")
+link_directories("3rdparty/workflow/lib")
 
-add_executable(PCI pavement.cpp pavement.h asphaltpavement.cpp asphaltpavement.h cementpavement.cpp cementpavement.h PCIService/common/mongoose.c PCIService/common/mongoose.h PCIService/main.cpp PCIService/handler/http_server.cpp PCIService/handler/http_server.h PCIService/handler/handler.cpp PCIService/handler/handler.h)
-#add_executable(PCI main.cpp pavement.cpp pavement.h cementpavement.cpp cementpavement.h)
-#add_executable(PCI main.cpp)
+add_executable(PCI pavement.cpp pavement.h asphaltpavement.cpp asphaltpavement.h cementpavement.cpp cementpavement.h )
 
-target_link_libraries(PCI jsoncpp)
+target_link_libraries(PCI jsoncpp workflow)
 

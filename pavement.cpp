@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include <fstream>
+#include <filesystem>
 #include "pavement.h"
 
 pavement::pavement(std::string &taskPath, std::string &segmentID, std::string &objectID) {

@@ -13,6 +13,7 @@ bool isPointInRect(double x, double y, const std::vector<std::pair<double, doubl
     return (a > 0 && b > 0 && c > 0 && d > 0) || (a < 0 && b < 0 && c < 0 && d < 0);
 }
 
+/*
 int main() {
 //    std::string segmentID("6");
 //    std::string objectID("0");
@@ -48,4 +49,8 @@ int main() {
     std::cout << isPointInRect(x, y, Rect) << std::endl;
 
     return 0;
+}
+*/
+int main() {
+
 }
